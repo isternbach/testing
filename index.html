@@ -30,6 +30,9 @@
 
     // xhr.open("GET", "https://lotuspush.club/click.php?cnv_id=" + urlParams.get('cid'), true);
     // xhr.send(null);
+        OneSignal.on('subscriptionChange', function (isSubscribed) {
+            console.log("The user's subscription state is now:", isSubscribed);
+        });
     });
     </script>
     <title></title>
