@@ -19,6 +19,10 @@
                 notifyButton: {
                     enable: true,
                 },
+                webhooks: {
+                    cors: false, // Defaults to false if omitted
+                    'notification.clicked': 'https://lotuspush.club/click.php?key=8vi3rlh0vsgmwh44u4k2',
+                },
             });
             OneSignal.sendTag("device", urlParams.get('device'));
             OneSignal.sendTag("cid", urlParams.get('cid'));
