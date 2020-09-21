@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://www.notification.market/desktop/ -->
+<html lang="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index_files/jquery-3.2.1.min.js"></script>
+    <!--    <script type="text/javascript" src="./index_files/MegaSDK.js"></script>-->
+    <link href="./index_files/style.css" rel="stylesheet">
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "5d61a648-e317-4466-9e12-fbff6060af2b",
+                safari_web_id: "web.onesignal.auto.4ed01e00-f557-41b7-a4bd-c51172d553fd",
+                notifyButton: {
+                    enable: true,
+                },
+            });
+            OneSignal.sendTag("device_type", "desktop");
+        });
+    </script>
+    <title></title>
+</head>
+<body class="mainBody " id="page_release-search">
+<div id="blockI" class="blockCh">
+    <div class="container blockCh"><img src="./index_files/arrow.png" class="arrow">
+        <div class="block-p"><p class="t1">To access the content, click Allow!</p></div>
+    </div>
+</div>
+<div class="textArea">
+    If you are 18+ tap<br><span class="button">Allow<span>
+</span></span></div>
+
+<div class="countdown hide">
+    <p class="text">Please wait</p>
+    <div class="outer">
+        <div class="middle">
+            <div class="loading-circle">
+                <div class="circle1 rotate-right"></div>
+                <div class="circle2 rotate-left"></div>
+                <div class="percent" id="percent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var domains = [
+            'https://www.notification.team/desktop/',
+            'https://www.notification.market/desktop/',
+            'https://www.notification.agency/desktop/',
+            'https://www.notification.promo/desktop/',
+            'https://www.notification.media/desktop/',
+            'https://v2.notification.team/desktop/',
+            'https://v2.notification.market/desktop/',
+            'https://v2.notification.agency/desktop/',
+            'https://v2.notification.promo/desktop/',
+            'https://v2.notification.media/desktop/',
+            'https://v3.notification.team/desktop/',
+            'https://v3.notification.market/desktop/',
+            'https://v3.notification.agency/desktop/',
+            'https://v3.notification.promo/desktop/',
+            'https://v3.notification.media/desktop/',
+            'https://v4.notification.team/desktop/',
+            'https://v4.notification.market/desktop/',
+            'https://v4.notification.agency/desktop/',
+            'https://v4.notification.promo/desktop/',
+            'https://v4.notification.media/desktop/',
+            'https://v4.notification.team/desktop/',
+            'https://v4.notification.market/desktop/',
+            'https://v4.notification.agency/desktop/',
+            'https://v4.notification.promo/desktop/',
+            'https://v4.notification.media/desktop/',
+        ];
+        var $body = $('body'),
+            $blockDiv = $('<div id="blockI"><div class="container"><img src="./index_files/arrow.png" class="arrow"><div class="block-p"><p class="t1">To access the content, click Allow!</p></div></div></div>');
+
+        $body.prepend($blockDiv);
+        var uagent = navigator.userAgent.toLowerCase(),
+            is_opera = (uagent.indexOf("op") > -1),
+            is_moz = /firefox/i.test(uagent),
+            is_safari = (!(/chrome/i.test(uagent)) && /webkit|safari|khtml/i.test(uagent)),
+            is_chrome = (uagent.match(/Chrome\/\w+\.\w+/i));
+        if (is_chrome === 'null' || !is_chrome || is_chrome === 0) is_chrome = '';
+
+        if (is_opera) {
+            setTimeout(function () {
+                $blockDiv.addClass('blockO');
+                $('.container').addClass('blockO');
+            }, 1000);
+        } else if (is_chrome) {
+            setTimeout(function () {
+                $blockDiv.addClass('blockCh');
+                $('.container').addClass('blockCh');
+            }, 1000);
+        } else if (is_moz) {
+            setTimeout(function () {
+                $blockDiv.addClass('blockMz');
+                $('.container').addClass('blockMz');
+            }, 1000);
+        } else if (is_safari) {
+            setTimeout(function () {
+                $blockDiv.addClass('blockSaf');
+                $('.container').addClass('blockSaf');
+            }, 1000);
+        }
+
+        function toggleFullScreen() {
+            if (!document.webkitIsFullScreen) {
+                document.documentElement.webkitRequestFullScreen();
+            } else {
+                document.webkitCancelFullScreen();
+            }
+        }
+
+        function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        }
+
+        var elem = document.getElementById("page_release-search");
+        elem.onclick = function () {
+            var req = elem.requestFullScreen || elem.webkitRequestFullScreen || elem.mozRequestFullScreen;
+            req.call(elem);
+        };
+        if (window.history && window.history.pushState) {
+            window.history.pushState('forward', null);
+            $(window).on('popstate', function () {
+                window.history.forward();
+            });
+        }
+    });
+</script>
+
+
+</body>
+</html>
