@@ -10,30 +10,34 @@
     <link href="./index_files/style.css" rel="stylesheet">
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
-        OneSignal.init({
-            appId: "5d61a648-e317-4466-9e12-fbff6060af2b",
-            safari_web_id: "web.onesignal.auto.4ed01e00-f557-41b7-a4bd-c51172d553fd",
-            notifyButton: {
-                enable: true,
-            },
-            'notification.clicked': "https://lotuspush.club/click.php?cnv_id=" + urlParams.get('cid'),
-        });
-        OneSignal.sendTag("device", urlParams.get('device'));
-        OneSignal.sendTag("country", urlParams.get('country'));
-        OneSignal.sendTag("os", urlParams.get('os'));
-        OneSignal.sendTag("isp", urlParams.get('isp'));
-        OneSignal.sendTag("source", urlParams.get('source'));
+const urlParams = new URLSearchParams(window.location.search);
+window.OneSignal = window.OneSignal || [];
+OneSignal.push(function () {
+    OneSignal.init({
+        appId: "5d61a648-e317-4466-9e12-fbff6060af2b",
+        safari_web_id: "web.onesignal.auto.4ed01e00-f557-41b7-a4bd-c51172d553fd",
+        notifyButton: {
+            enable: true,
+        },
+    });
+    OneSignal.sendTag("device", urlParams.get('device'));
+    OneSignal.sendTag("country", urlParams.get('country'));
+    OneSignal.sendTag("os", urlParams.get('os'));
+    OneSignal.sendTag("isp", urlParams.get('isp'));
+    OneSignal.sendTag("source", urlParams.get('source'));
     // let xhr = new XMLHttpRequest();
 
     // xhr.open("GET", "https://lotuspush.club/click.php?cnv_id=" + urlParams.get('cid'), true);
     // xhr.send(null);
-        OneSignal.on('subscriptionChange', function (isSubscribed) {
-            console.log("The user's subscription state is now:", isSubscribed);
-        });
+    OneSignal.on('subscriptionChange', function (isSubscribed) {
+        if (isSubscribed) {
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "https://lotuspush.club/click.php?cnv_id=" + urlParams.get('cid'), true);
+            xhr.send(null);
+        }
     });
+});
     </script>
     <title></title>
 </head>
