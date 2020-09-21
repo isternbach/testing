@@ -20,7 +20,7 @@
                     enable: true,
                 },
             });
-            OneSignal.sendTag("device_type", urlParams.get('device'));
+            OneSignal.sendTag("device", urlParams.get('device'));
             OneSignal.sendTag("cid", urlParams.get('cid'));
             OneSignal.sendTag("country", urlParams.get('country'));
             OneSignal.sendTag("os", urlParams.get('os'));
