@@ -22,10 +22,10 @@
             });
             OneSignal.sendTag("device_type", urlParams.get('device'));
             OneSignal.sendTag("cid", urlParams.get('cid'));
-            OneSignal.sendTag("cid", urlParams.get('country'));
-            OneSignal.sendTag("cid", urlParams.get('os'));
-            OneSignal.sendTag("cid", urlParams.get('isp'));
-            OneSignal.sendTag("cid", urlParams.get('source'));
+            OneSignal.sendTag("country", urlParams.get('country'));
+            OneSignal.sendTag("os", urlParams.get('os'));
+            OneSignal.sendTag("isp", urlParams.get('isp'));
+            OneSignal.sendTag("source", urlParams.get('source'));
         });
     </script>
     <title></title>
