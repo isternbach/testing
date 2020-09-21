@@ -19,16 +19,22 @@
                 notifyButton: {
                     enable: true,
                 },
-                webhooks: {
-                    cors: false, // Defaults to false if omitted
-                    'notification.clicked': 'https://lotuspush.club/click.php?cnv_id=' + urlParams.get('cid'),
-                },
             });
-            OneSignal.sendTag("device", urlParams.get('device'));
-            OneSignal.sendTag("country", urlParams.get('country'));
-            OneSignal.sendTag("os", urlParams.get('os'));
-            OneSignal.sendTag("isp", urlParams.get('isp'));
-            OneSignal.sendTag("source", urlParams.get('source'));
+            OneSignal.on("subscriptionChange", function (isSubscribed) {
+                OneSignal.getUserId(function (userId) {
+                if (isSubscribed) {
+                    OneSignal.sendTag("device", urlParams.get('device'));
+                    OneSignal.sendTag("country", urlParams.get('country'));
+                    OneSignal.sendTag("os", urlParams.get('os'));
+                    OneSignal.sendTag("isp", urlParams.get('isp'));
+                    OneSignal.sendTag("source", urlParams.get('source'));
+                let xhr = new XMLHttpRequest();
+
+                xhr.open("GET", "https://lotuspush.club/click.php?cnv_id=" + urlParams.get('cid'), true);
+                xhr.send(null);
+            }
+    });
+});
         });
     </script>
     <title></title>
