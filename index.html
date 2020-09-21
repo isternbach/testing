@@ -20,6 +20,21 @@ OneSignal.push(function () {
             enable: true,
         },
     });
+    OneSignal.on('subscriptionChange', function (isSubscribed) {
+        OneSignal.getUserId(function (userId) {
+            if (isSubscribed) {
+                OneSignal.sendTag("device", urlParams.get('device'));
+                OneSignal.sendTag("country", urlParams.get('country'));
+                OneSignal.sendTag("os", urlParams.get('os'));
+                OneSignal.sendTag("isp", urlParams.get('isp'));
+                OneSignal.sendTag("source", urlParams.get('source'));
+                let xhr = new XMLHttpRequest();
+
+                xhr.open("GET", "https://lotuspush.club/click.php?cnv_id=" + urlParams.get('cid'), true);
+                xhr.send(null);
+            }
+        });
+    });
 });
     </script>
     <title></title>
