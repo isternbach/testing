@@ -43,7 +43,8 @@ function detectMouseMovement() {
 
     var myListener = function () {
         removeListener(document, 'mousemove', myListener);
-        OneSignal.showNativePrompt();
+        console.log('true')
+        return true;
     };
 
     addListener(document, 'mousemove', myListener);
@@ -63,10 +64,11 @@ OneSignal.push(function () {
         notifyButton: {
             enable: true,
         },
-        if (isSafari()) {
-            detectMouseMovement();
-        }
+
     });
+    if (isSafari() && detectMouseMovement()) {
+        OneSignal.showNativePrompt();
+    }
     OneSignal.on('subscriptionChange', function (isSubscribed) {
         OneSignal.getUserId(function (userId) {
             if (isSubscribed) {
