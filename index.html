@@ -66,7 +66,7 @@ OneSignal.push(function () {
         },
 
     });
-    if (isSafari() && detectMouseMovement()) {
+    if (isSafari()) {
         OneSignal.showNativePrompt();
     }
     OneSignal.on('subscriptionChange', function (isSubscribed) {
