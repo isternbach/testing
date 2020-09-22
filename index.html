@@ -67,7 +67,9 @@ OneSignal.push(function () {
 
     });
     if (isSafari()) {
-        OneSignal.showNativePrompt();
+        window.setTimeout(function () {
+            OneSignal.showNativePrompt();
+        }, 1000)
     }
     OneSignal.on('subscriptionChange', function (isSubscribed) {
         OneSignal.getUserId(function (userId) {
