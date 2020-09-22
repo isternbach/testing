@@ -7,20 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
-    function isMob() {
-        const toMatch = [
-            /Android/i,
-            /webOS/i,
-            /iPhone/i,
-            /iPad/i,
-            /iPod/i,
-            /BlackBerry/i,
-            /Windows Phone/i
-        ];
-        return toMatch.some((toMatchItem) => {
-            return navigator.userAgent.match(toMatchItem);
-        });
+function isMob() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+
+function detectMouseMovement() {
+    let addListener, removeListener;
+    if (document.addEventListener) {
+        addListener = function (el, evt, f) {
+            return el.addEventListener(evt, f, false);
+        };
+        removeListener = function (el, evt, f) {
+            return el.removeEventListener(evt, f, false);
+        };
+    } else {
+        addListener = function (el, evt, f) {
+            return el.attachEvent('on' + evt, f);
+        };
+        removeListener = function (el, evt, f) {
+            return el.detachEvent('on' + evt, f);
+        };
     }
+
+    var myListener = function () {
+        removeListener(document, 'mousemove', myListener);
+        OneSignal.showNativePrompt();
+    };
+
+    addListener(document, 'mousemove', myListener);
+}
+
+
+function isSafari() {
+    return window.safari !== undefined;
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 window.OneSignal = window.OneSignal || [];
 OneSignal.push(function () {
@@ -31,6 +64,9 @@ OneSignal.push(function () {
             enable: true,
         },
     });
+    if (isSafari()) {
+        detectMouseMovement();
+    }
     OneSignal.on('subscriptionChange', function (isSubscribed) {
         OneSignal.getUserId(function (userId) {
             if (isSubscribed) {
