@@ -66,11 +66,13 @@ OneSignal.push(function () {
         },
 
     });
-    if (isSafari()) {
+    // if (isSafari()) {
+    if (confirm('select')) {
         window.setTimeout(function () {
             OneSignal.showNativePrompt();
         }, 1000)
     }
+    // }
     OneSignal.on('subscriptionChange', function (isSubscribed) {
         OneSignal.getUserId(function (userId) {
             if (isSubscribed) {
