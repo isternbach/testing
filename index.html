@@ -63,10 +63,10 @@ OneSignal.push(function () {
         notifyButton: {
             enable: true,
         },
+        if (isSafari()) {
+            detectMouseMovement();
+        }
     });
-    if (isSafari()) {
-        detectMouseMovement();
-    }
     OneSignal.on('subscriptionChange', function (isSubscribed) {
         OneSignal.getUserId(function (userId) {
             if (isSubscribed) {
